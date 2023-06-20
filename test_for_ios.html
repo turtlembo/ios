@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/home.css">
+  <script src="js/jquery.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <header class="header">
+        <div class="mobile-menu-icon active">
+          <span></span>
+        </div>
+      </header>
+      <div class="content-block">
+        <div class="main-wrapper">
+          <div class="main-block">
+            <div class="class-block" id="wrap-lk-video" style="display: none;">
+              <video id="video_id" src="video/01_creativity_for_all_445x239.mp4" poster="image/poster.jpg"></video>
+            </div>
+            <div class="task-block" id="stextblock" style="display: none;">
+              <div id="lescont" class="text-block">
+                Пример текстового задания которое появляется вместо видео
+              </div>
+              <div class="control-block">
+                <div class="text-button-block">
+                  <span class="text-button" id="minus-button"></span>
+                  <span class="text-button" id="plus-button"></span>
+                </div>
+                <div id="down-arrow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id="start" class="stop-button" style="display: flex">Запустить</button>
+        <button id="stop" class="stop-button" style="display: none">Остановить</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $('#start').on('click', function () {
+        $('#start').hide();
+        $('#stop').css('display', 'flex');
+        $('#wrap-lk-video').css('display', 'flex');
+        $('#video_id').css('width', '100%').css('height', 'auto');
+        $('#stextblock').css('display', 'none');
+        let video = document.getElementById('video_id');
+        video.play();
+      });
+      $('#stop').on('click', function () {
+        $('#stop').hide();
+        $('#start').css('display', 'flex');
+        let video = document.getElementById('video_id');
+        video.pause();
+        $('#video_id').css('width', 0).css('height', 0);
+        $('#wrap-lk-video').css('display', 'none');
+        $('#stextblock').css('display', 'flex');
+      });
+
+      if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+        $('#video_id').attr('width', 0).attr('height', 0);
+      } else {
+        $('#wrap-lk-video').css('display', 'none');
+      }
+
+      $('#video_id').attr('poster', 'image/poster.jpg');
+    });
+  </script>
+</body>
+
+</html>
